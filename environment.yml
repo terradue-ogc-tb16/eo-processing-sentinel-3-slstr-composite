@@ -1,0 +1,13 @@
+name: env_s3
+channels:
+  - conda-forge
+  - terradue
+dependencies:
+  - snap
+  - ipykernel
+  - geopandas
+  - otb
+  - cioppy 
+  - gdal>2.2.2
+  - poppler<0.66
+
