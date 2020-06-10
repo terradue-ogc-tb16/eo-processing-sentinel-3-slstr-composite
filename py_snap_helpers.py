@@ -212,6 +212,8 @@ class GraphProcessor():
         
         fd, path = tempfile.mkstemp()
         
+        rc = None
+        
         try:
         
             self.save_graph(filename=path)
@@ -221,7 +223,7 @@ class GraphProcessor():
                '-c',
                '2048M',
                path]
-            run_command(options)
+            rc = run_command(options)
             #p = subprocess.Popen(options,
             #    stdout=subprocess.PIPE, stdin=subprocess.PIPE, stderr=subprocess.PIPE)
 
@@ -232,7 +234,7 @@ class GraphProcessor():
             os.remove(path)
             
             logging.info('Done.')
-        return True
+        return rc
         
 def get_snap_parameters(operator):
     """This function returns the SNAP operator ParameterDescriptors (snappy method op_spi.getOperatorDescriptor().getParameterDescriptors())
@@ -508,4 +510,6 @@ def snap_graph(gpt_path, operators, **kwargs):
     
     mygraph.view_graph()
     
-    mygraph.run()
+    res = mygraph.run()
+    
+    return res

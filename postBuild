@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set -x
+
+$PREFIX/snap/bin/snap --nosplash --nogui --modules --install org.esa.snap.idepix.core
+$PREFIX/snap/bin/snap --nosplash --nogui --modules --install org.esa.snap.idepix.olci
+
+$PREFIX/snap/bin/snap --nosplash --nogui --modules --refresh --update org.esa.s3tbx.s3tbx.rad2refl
+
+( cmdpid=$BASHPID; (sleep 30; kill $cmdpid) & exec $PREFIX/snap/bin/snap --nosplash --nogui --modules --list --refresh )
+
+export GPT_BIN=$PREFIX/snap/bin/gpt
+
+exit 0

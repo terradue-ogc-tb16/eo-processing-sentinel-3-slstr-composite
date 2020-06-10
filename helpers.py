@@ -163,7 +163,7 @@ def s3_slstr_proc(operators, **kwargs):
     
     mygraph.run()
     
-def s3_rgb_composite(red, green, blue, cloud, confidence, exception, geo_transform, projection_ref, output_name):
+def s3_rgb_composite(red, green, blue, cloud, confidence, exception, geo_transform, projection_ref, output_name, hfact=5.0):
 
     rgb_r = np.zeros(red.shape)
     rgb_g = np.zeros(red.shape)
@@ -208,7 +208,7 @@ def s3_rgb_composite(red, green, blue, cloud, confidence, exception, geo_transfo
     ContrastEnhancement.SetParameterOutputImagePixelType('out', 
                                                          otbApplication.ImagePixelType_uint8)
     ContrastEnhancement.SetParameterFloat('nodata', 0.0)
-    ContrastEnhancement.SetParameterFloat('hfact', 3.0)
+    ContrastEnhancement.SetParameterFloat('hfact', hfact)
     ContrastEnhancement.SetParameterInt('bins', 256)
     ContrastEnhancement.SetParameterInt('spatial.local.w', 500)
     ContrastEnhancement.SetParameterInt('spatial.local.h', 500)
@@ -238,5 +238,7 @@ def s3_rgb_composite(red, green, blue, cloud, confidence, exception, geo_transfo
     output.GetRasterBand(4).WriteArray(alpha)
     
     output.FlushCache()
+    
+    output = None
     
     return rgb_r, rgb_g, rgb_b, alpha
