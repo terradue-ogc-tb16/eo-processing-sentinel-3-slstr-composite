@@ -13,8 +13,6 @@ $PREFIX/snap/bin/snap --nosplash --nogui --modules --update org.esa.s3tbx.s3tbx.
 
 export GPT_BIN=$PREFIX/snap/bin/gpt
 
-conda install -y -n notebook pyyaml instac 
-
-stage-in -c stage-in.yml -t /workspace/data/
+/opt/anaconda/envs/env_s3/bin/stage-in -c stage-in.yml -t /workspace/data/
 
 exit 0
