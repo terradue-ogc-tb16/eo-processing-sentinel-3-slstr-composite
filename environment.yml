@@ -12,3 +12,5 @@ dependencies:
   - pystac
   - lxml
   - shapely
+  - pyyaml
+  - instac
