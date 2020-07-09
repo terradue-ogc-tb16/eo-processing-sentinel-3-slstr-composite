@@ -108,6 +108,10 @@ def export_s3(bands):
         
     output.FlushCache()
     
+    output = None
+    
+    del(output)
+    
     return True
 
 def read_s3(bands):
@@ -240,5 +244,7 @@ def s3_rgb_composite(red, green, blue, cloud, confidence, exception, geo_transfo
     output.FlushCache()
     
     output = None
+    
+    del(output)
     
     return rgb_r, rgb_g, rgb_b, alpha

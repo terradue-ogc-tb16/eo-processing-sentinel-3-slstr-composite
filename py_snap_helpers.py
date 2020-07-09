@@ -2,7 +2,6 @@ import lxml.etree as etree
 import subprocess
 import tempfile
 import time
-#import psutil
 import os
 import sys
 import snappy 
@@ -70,7 +69,6 @@ class GraphProcessor():
         """
         
         display_xml_nice(etree.tostring(self.root , pretty_print=True))
-        #print(etree.tostring(self.root , pretty_print=True))
         
     def add_node(self, node_id, operator, parameters, source):
         """This method adds or overwrites a node to the SNAP Graph
@@ -179,19 +177,7 @@ class GraphProcessor():
             file.write(etree.tostring(self.root, pretty_print=True).decode())
      
        
-    #def plot_graph(self):
-        
-    #    for node_id in self.root.xpath('/graph/node/@id'):
-            
-
-    #        xpath_expr = '/graph/node[@id="%s"]' % node_id
-            
-    #        if len(self.root.xpath(xpath_expr + '/sources/sourceProduct')) != 0:
-    #            print(self.root.xpath(xpath_expr + '/sources/sourceProduct'))[0].attrib['refid']
-    #            print(node_id)
-    #        else:
-    #            print(node_id)
-    #    return True
+    
     
     def run(self):
         """This method runs the SNAP Graph using gpt
@@ -217,19 +203,14 @@ class GraphProcessor():
         try:
         
             self.save_graph(filename=path)
-            #options = ['/home/fbrito/.conda/envs/env_app_s3/snap/bin/gpt',
+
             options = [self.gpt_path,
                '-x',
                '-c',
-               '2048M',
+               '1024M',
                path]
             rc = run_command(options)
-            #p = subprocess.Popen(options,
-            #    stdout=subprocess.PIPE, stdin=subprocess.PIPE, stderr=subprocess.PIPE)
 
-            #logging.info('Process PID: %s' % p.pid)
-            #res, err = p.communicate()
-            #logging.info(res, err)
         finally:
             os.remove(path)
             
@@ -302,62 +283,6 @@ def get_operator_help(operator):
         logging.info('Possible values: {}\n').format(list(param.getValueSet()))
             
             
-def backscatter(**kwargs):
-    """This function provides an example of a simple Graph producing the Sentinel-1 backscatters. This approach is valid for linear SNAP Graphs i.e. no fan-in/out in the DAG.  
-    
-    Args:
-        kwargs: One or more dictionaries containing the SNAP operator parameters.
-        
-    Returns
-        None.
-    
-    Raises:
-        None.
-    """
-    options = dict()
-    
-    operators = ['Read', 
-                 'ThermalNoiseRemoval', 
-                 'Apply-Orbit-File',
-                 'Calibration',
-                 'Speckle-Filter',
-                 'Multilook',
-                 'LinearToFromdB',
-                 'Terrain-Correction',
-                 'Subset',
-                 'Write']
-    
-    for operator in operators:
-            
-        logging.info('Getting default values for Operator {}'.format(operator))
-        parameters = get_operator_default_parameters(operator)
-        
-        options[operator] = parameters
-
-    for key, value in kwargs.items():
-        
-        logging.info('Updating Operator {}'.format(key))
-        options[key.replace('_', '-')].update(value)
-    
-    mygraph = GraphProcessor()
-    
-    for index, operator in enumerate(operators):
-    
-        logging.info('Adding Operator {} to graph'.format(operator))
-        if index == 0:            
-            source_node_id = ''
-        
-        else:
-            source_node_id = operators[index - 1]
-        
-        mygraph.add_node(operator,
-                         operator, 
-                         options[operator], source_node_id)
-    
-    #mygraph.view_graph()
-    
-    mygraph.run()
-    
     
 def op_help(op):
     """This function prints the human readable information about a SNAP operator 
