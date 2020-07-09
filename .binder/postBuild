@@ -15,4 +15,6 @@ export GPT_BIN=$PREFIX/snap/bin/gpt
 
 /opt/anaconda/envs/env_s3/bin/stage-in -c .binder/stage-in.yml -t /workspace/data/
 
+jupyter nbextension enable --py --sys-prefix ipyleaflet
+
 exit 0
