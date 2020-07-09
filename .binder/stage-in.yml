@@ -7,4 +7,4 @@ catalog:
             title: Sentinel-3 SLSTR Level 1 (SL_1_RBT)
             description: Sentinel-3 SLSTR Level 1 (SL_1_RBT) catalogue reference
             entries:
-                - https://catalog.terradue.com/sentinel3/search?uid=S3A_SL_1_RBT____20200708T101225_20200708T101525_20200708T121111_0179_060_179_2340_LN2_O_NR_004
+                - https://catalog.terradue.com/sentinel3/search?uid=S3B_SL_1_RBT____20200627T022503_20200627T022803_20200628T072731_0179_040_260_1800_LN2_O_NT_004
