@@ -14,5 +14,4 @@ dependencies:
   - shapely
   - pyyaml
   - instac
-  - ipyleaflet
   - imageio
