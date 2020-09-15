@@ -15,3 +15,4 @@ dependencies:
   - pyyaml
   - instac
   - imageio
+  - parso=0.7
