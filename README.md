@@ -1,5 +1,7 @@
 ## SNAP and Sentinel-3
 
+[![Build Status](https://travis-ci.com/terradue-ogc-tb16/eo-processing-sentinel-3-slstr-composite.svg?branch=develop)](https://travis-ci.com/terradue-ogc-tb16/eo-processing-sentinel-3-slstr-composite)
+
 ### Using Binder
 
 Click the badge below to run this notebook on Binder:
