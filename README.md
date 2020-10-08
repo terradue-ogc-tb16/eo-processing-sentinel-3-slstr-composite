@@ -8,6 +8,11 @@ Click the badge below to run this notebook on Binder:
 
 ### Run locally using docker
 
+#### Use the built docker image
+
+TBW
+
+#### Build the image
 Clone this repository with:
 
 ```bash
