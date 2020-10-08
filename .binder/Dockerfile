@@ -4,7 +4,7 @@ MAINTAINER Terradue S.r.l
 
 USER ${NB_USER}
 
-COPY --chown=${NB_USER}:${NB_GID} . ${HOME}
+COPY --chown=1000:100 . ${HOME}
 
 RUN /opt/anaconda/bin/conda env create --file ${HOME}/.binder/environment.yml && /opt/anaconda/bin/conda clean -a -y
 
